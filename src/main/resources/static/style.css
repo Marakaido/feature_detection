@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 3fr 2fr;
+    grid-gap: 10px;
+    background-color: beige;
+    width: 100vw;
+    height: 100vh;
+}
+
+.image {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    max-height: 80vh;
+    max-width: 90vw;
+    align-self: center;
+    justify-self: center;
+}
+
+.button_wrapper {
+    grid-column: 2 / 3;
+    grid-row: 3 / 3;
+    align-self: center;
+  justify-self: center;
+}
+
+#inputFile {
+    display: none;
+}

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <img class="image" id="targetImg" />
+        <div class="button_wrapper">    
+            <button onclick="document.getElementById('inputFile').click()">Open</button>
+            <input id="inputFile" type="file" name="file" onchange="loadFile()">
+            <button>Method</button>
+            <button onclick="apply()">Apply</button>
+        </div>
+    </div>
+</body>
+</html>
