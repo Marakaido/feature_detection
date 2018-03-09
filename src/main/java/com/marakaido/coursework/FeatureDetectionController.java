@@ -5,14 +5,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.annotation.MultipartConfig;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.io.BufferedInputStream;
+import java.io.IOException;
 
 @RestController
-@MultipartConfig(fileSizeThreshold = 20971520)
 public class FeatureDetectionController {
 
     @RequestMapping("/harris")
-    public byte[] harris(@RequestParam("file") MultipartFile file) {
-        return new byte[]{};
+    public int[] harris(@RequestParam("file") MultipartFile file) throws IOException {
+        BufferedImage img = ImageIO.read(new BufferedInputStream(file.getInputStream()));
+        byte[] data = ((DataBufferByte) img.getRaster().getDataBuffer()).getData();
+        int rows = img.getHeight();
+        int cols = img.getWidth();
+
+        return new int[]{1, 2, 3, 4, 5};
     }
 }
