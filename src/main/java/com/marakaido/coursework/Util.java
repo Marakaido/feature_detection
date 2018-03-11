@@ -56,4 +56,47 @@ public class Util {
 
         return result;
     }
+
+    public static double[][] multiplyPerElement(final double[][] left, final double[][] right) {
+        if(left.length != right.length || left[0].length != right[0].length)
+            throw new IllegalArgumentException();
+
+        double[][] result = new double[left.length][left[0].length];
+
+        for (int i = 0; i < left.length; i++)
+            for (int j = 0; j < left[0].length; j++)
+                result[i][j] = left[i][j] * right[i][j];
+
+        return result;
+    }
+
+    public static double[][] scalarMultiply(double scalar, double[][] matrix) {
+        double[][] result = new double[matrix.length][matrix[0].length];
+
+        for (int i = 0; i < matrix.length; i++)
+            for (int j = 0; j < matrix[i].length; j++)
+                result[i][j] = scalar * matrix[i][j];
+
+        return result;
+    }
+
+    public static final double[][] xDerFilter = Util.scalarMultiply(1/3.0, new double[][] {
+            {-1, 0, 1},
+            {-1, 0, 1},
+            {-1, 0, 1}
+    });
+
+    public static final double[][] yDerFilter = Util.scalarMultiply(1/3.0, new double[][] {
+            {-1, -1, -1},
+            { 0,  0,  0},
+            { 1,  1,  1}
+    });
+
+    public static final double[][] gaussian5Filter = Util.scalarMultiply(1/273.0, new double[][] {
+            {1,  4,  7,  4, 1},
+            {4, 16, 26, 16, 4},
+            {7, 26, 41, 26, 7},
+            {4, 16, 26, 16, 4},
+            {1,  4,  7,  4, 1}
+    });
 }
