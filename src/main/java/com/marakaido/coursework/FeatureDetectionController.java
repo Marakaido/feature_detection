@@ -31,6 +31,6 @@ public class FeatureDetectionController {
         detector.setRThreshold(1000);
         detector.setNonMaxSpan(5);
 
-        return detector.apply(data, rows, cols);
+        return detector.apply(data);
     }
 }

@@ -16,7 +16,7 @@ public class HarrisDetectorTests {
 
         HarrisDetector detector = new HarrisDetector();
         detector.setRThreshold(0.0001);
-        int[] result = detector.apply(img, 5, 10);
+        int[] result = detector.apply(img);
 
         assertArrayEquals(new int[]{2, 4}, result);
     }

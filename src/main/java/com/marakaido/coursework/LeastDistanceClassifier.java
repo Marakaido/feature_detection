@@ -14,7 +14,10 @@ public class LeastDistanceClassifier implements Classifier {
     public LeastDistanceClassifier(Path file) throws IOException {
         this.database = new HashMap<>();
         Files.lines(file).forEach(line -> {
-            int[] coords = Arrays.stream(line.split(" ")).mapToInt(Integer::parseInt).toArray();
+            String[] numbers = line.split(" ");
+            int[] coords = new int[numbers.length];
+            for (int i = 0; i < coords.length; i++)
+                coords[i] = (int)Math.round(Double.parseDouble(numbers[i]));
             database.put(
                     new Descriptor(Arrays.copyOfRange(coords, 0,coords.length-1)),
                     coords[coords.length-1]);
@@ -31,7 +34,7 @@ public class LeastDistanceClassifier implements Classifier {
             double measure = measureOfDissimilarity(descriptor, entry.getKey());
             if(measure < min) {
                 min = measure;
-                result = entry.getValue();
+                if(min < 0.5) result = entry.getValue();
             }
         }
         return result;
