@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.function.BinaryOperator;
 
 public class HarrisDetector {
-
-    public int[] apply(final int[] img, final int rows, final int cols) {
-        double[][] data = Util.convertTo2D(Util.grayscale(img), rows, cols);
-
+    /**
+     * Applies Harris corner detector to 2-d matrix
+     * @param data 2-d matrix
+     * @return 1-d array of indexes, where x-coordinates have uneven and y even indexes
+     */
+    public int[] apply(final double[][] data) {
         double[][] Fx = Util.correlate(Util.xDerFilter, data);
         double[][] Fy = Util.correlate(Util.yDerFilter, data);
         
