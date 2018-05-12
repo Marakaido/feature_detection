@@ -40,7 +40,7 @@ public class LeastDistanceClassifier implements Classifier {
         return result;
     }
 
-    private class Descriptor {
+    public static class Descriptor {
         public Descriptor(final int[] coords) {
             this.coords = Util.convertTo2D(normalize(coords), coords.length / 2, 2);
         }
@@ -76,7 +76,7 @@ public class LeastDistanceClassifier implements Classifier {
         private double[][] coords;
     }
 
-    private double measureOfDissimilarity(final Descriptor left, final Descriptor right) {
+    public static double measureOfDissimilarity(final Descriptor left, final Descriptor right) {
         double[][] leftCoords = left.getCoords();
         double[][] rightCoords = right.getCoords();
         if(leftCoords.length > rightCoords.length) {
@@ -109,7 +109,7 @@ public class LeastDistanceClassifier implements Classifier {
         return sum + 0.01 * unaccounted;
     }
 
-    private BiFunction<double[], double[], Double> dist = (left, right) -> {
+    private static BiFunction<double[], double[], Double> dist = (left, right) -> {
         double sum = 0;
         for (int i = 0; i < left.length; i++)
             sum += Math.abs(left[i] - right[i]);

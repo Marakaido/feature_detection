@@ -80,6 +80,38 @@ public class Util {
         return result;
     }
 
+    public double[][] equalizeHistogram(final double[][] data) {
+        final int[] histogram = getHistogram(data);
+        final int[] translated = new int[histogram.length];
+        for (int i = 0; i < 255; i++) {
+            double s = 0;
+            for (int j = 0; j < i + 1; j++) s += histogram[j];
+            translated[i] = (int) (255 * s);
+        }
+
+        final double[][] result = new double[data.length][data[0].length];
+        for (int i = 0; i < data.length; i++) {
+            for (int j = 0; j < data[0].length; j++) {
+                result[i][j] = translated[(int)data[i][j]];
+            }
+        }
+
+        return result;
+    }
+
+    public int[] getHistogram(final double[][] data) {
+        int[] histogram = new int[256];
+        for (double[] row: data)
+            for (double intensity : row)
+                histogram[(int)intensity]++;
+
+        int length = data.length * data[0].length;
+        for (int i = 0; i < histogram.length; i++)
+            histogram[i] /= length;
+
+        return histogram;
+    }
+
     public static final double[][] xDerFilter = Util.scalarMultiply(1/3.0, new double[][] {
             {-1, 0, 1},
             {-1, 0, 1},
