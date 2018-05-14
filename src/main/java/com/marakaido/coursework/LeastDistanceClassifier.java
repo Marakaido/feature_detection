@@ -14,10 +14,10 @@ public class LeastDistanceClassifier implements Classifier {
     public LeastDistanceClassifier(Path file) throws IOException {
         this.database = new HashMap<>();
         Files.lines(file).forEach(line -> {
-            String[] numbers = line.split(" ");
+            String[] numbers = line.split(",");
             int[] coords = new int[numbers.length];
             for (int i = 0; i < coords.length; i++)
-                coords[i] = (int)Math.round(Double.parseDouble(numbers[i]));
+                coords[i] = Integer.parseInt(numbers[i]);
             database.put(
                     new Descriptor(Arrays.copyOfRange(coords, 0,coords.length-1)),
                     coords[coords.length-1]);
@@ -110,6 +110,7 @@ public class LeastDistanceClassifier implements Classifier {
     }
 
     private static BiFunction<double[], double[], Double> dist = (left, right) -> {
+        if(left.length != right.length) throw new IllegalArgumentException();
         double sum = 0;
         for (int i = 0; i < left.length; i++)
             sum += Math.abs(left[i] - right[i]);
